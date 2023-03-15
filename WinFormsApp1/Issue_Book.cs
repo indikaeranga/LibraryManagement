@@ -14,14 +14,14 @@ namespace WinFormsApp1
     public partial class Issue_Book : Form
     {
         ConString cn = new ConString();
-        public Issue_Book(string teacher)
+        public Issue_Book(string teacher, Size formSize)
         {
             InitializeComponent();
+            this.Size = formSize;
             lblteacher.Text = teacher.ToString();
-            dgvreturn.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvreturn.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvreturn.SelectionMode = DataGridViewSelectionMode.FullRowSelect;           
             dgvissueBK_STD.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvissueBK_STD.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            btnissue.Enabled = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -33,15 +33,17 @@ namespace WinFormsApp1
 
         private void btnverify_Click(object sender, EventArgs e)
         {
-            check_book_name();
-            check_student_name();
+            if (check_book_name() == 1 && check_student_name() ==1) { btnissue.Enabled = true; }
+            
+
+
             grid_load_Book_Issue_STD();
             grid_load_Book_receive_STD();
         }
 
-        private void check_book_name()
+        private int check_book_name()
         {
-
+            int number;
             string bookid = txtbookid.Text;
             try
             {
@@ -57,24 +59,33 @@ namespace WinFormsApp1
                 {
                     DataRow row = dta.Rows[0];
                     lblBook.Text = row[0].ToString();
+                     number = 1;
                 }
                 else
                 {
-                    MessageBox.Show("Book Not add to Inventory. Please add book before Issue.");
+                    MessageBox.Show("Invalid Book ID or Not add to Inventory. Please add book before Issue.");
+                    btnissue.Enabled = false;
+                    lblstudent.Text = "";
+                    lblBook.Text = "";
+                    number = 0;
                 }
                 con.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("error : Book ID empty");
+                btnissue.Enabled = false;
+                lblstudent.Text = "";
+                lblBook.Text = "";
+                number = 0;
             }
-
+            return number;
 
         }
 
-        private void check_student_name()
+        private int check_student_name()
         {
-
+            int number;
             string stdid = txtstdid.Text;
             try
             {
@@ -90,18 +101,27 @@ namespace WinFormsApp1
                 {
                     DataRow row = dta.Rows[0];
                     lblstudent.Text = row[0].ToString();
+                    number = 1;
                 }
                 else
                 {
-                    MessageBox.Show("Student not add to system. Please add before issue book.");
+                    MessageBox.Show("Invalid Student ID or not add to system. Please add before issue book.");
+                    btnissue.Enabled = false;
+                    lblstudent.Text = "";
+                    lblBook.Text = "";
+                    number = 0;
                 }
                 con.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("error : Student ID empty");
+                btnissue.Enabled = false;
+                lblstudent.Text = "";
+                lblBook.Text = "";
+                number = 0;
             }
-
+            return number;
 
         }
 
@@ -110,7 +130,7 @@ namespace WinFormsApp1
             SqlConnection con = new SqlConnection(cn.connectionstring());
             con.Open();
             string sql = "select Issue_ID,Book_ID,Student_ID,Issue_Date,Due_Date,Return_status from Issue_Book " +
-                         " where student_id = '" + txtstdid.Text + "' and Return_status ='no'";
+                         " where student_id = '" + txtstdid.Text + "' and Return_status ='NO'";
             SqlCommand cmd = new SqlCommand(sql, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dta = new DataTable();
@@ -124,7 +144,7 @@ namespace WinFormsApp1
             SqlConnection con = new SqlConnection(cn.connectionstring());
             con.Open();
             string sql = "select Issue_ID,Book_ID,Student_ID,Issue_Date,Due_Date,Return_status from Issue_Book " +
-                         " where student_id = '" + txtstdid.Text + "' and Return_status ='yes'";
+                         " where student_id = '" + txtstdid.Text + "' and Return_status ='YES'";
             SqlCommand cmd = new SqlCommand(sql, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dta = new DataTable();
@@ -146,12 +166,16 @@ namespace WinFormsApp1
                     SqlConnection con = new SqlConnection(cn.connectionstring());
                     con.Open();
                     string sql = "insert into Issue_Book (Book_ID,Student_ID,Issue_Date,Due_Date,Return_status,Issue_teacher)" +
-                        " values  ('" + bookid + "','" + stdid + "','" + issue + "','" + due + "', 'no'," +
+                        " values  ('" + bookid + "','" + stdid + "','" + issue + "','" + due + "', 'NO'," +
                         " '" + lblteacher.Text + "') ";
                     SqlCommand cmd = new SqlCommand(sql, con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Book Issued.");
+                    btnissue.Enabled = false;
+                    //lblstudent.Text = "";
+                    lblBook.Text = "";
+                    txtbookid.Text = "";
                 }
                 catch (Exception ex)
                 {

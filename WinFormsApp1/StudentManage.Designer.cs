@@ -86,6 +86,8 @@
             // 
             // btnSdelete
             // 
+            this.btnSdelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSdelete.ForeColor = System.Drawing.Color.Red;
             this.btnSdelete.Location = new System.Drawing.Point(1056, 150);
             this.btnSdelete.Name = "btnSdelete";
             this.btnSdelete.Size = new System.Drawing.Size(94, 29);
@@ -96,6 +98,8 @@
             // 
             // btnSrefresh
             // 
+            this.btnSrefresh.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSrefresh.ForeColor = System.Drawing.Color.Green;
             this.btnSrefresh.Location = new System.Drawing.Point(1056, 198);
             this.btnSrefresh.Name = "btnSrefresh";
             this.btnSrefresh.Size = new System.Drawing.Size(94, 29);
@@ -106,6 +110,7 @@
             // 
             // btnSupdate
             // 
+            this.btnSupdate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSupdate.Location = new System.Drawing.Point(1056, 101);
             this.btnSupdate.Name = "btnSupdate";
             this.btnSupdate.Size = new System.Drawing.Size(94, 29);
@@ -116,6 +121,8 @@
             // 
             // btnSadd
             // 
+            this.btnSadd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSadd.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnSadd.Location = new System.Drawing.Point(1056, 52);
             this.btnSadd.Name = "btnSadd";
             this.btnSadd.Size = new System.Drawing.Size(94, 29);
@@ -245,6 +252,8 @@
             // 
             // btnSidsearch
             // 
+            this.btnSidsearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSidsearch.ForeColor = System.Drawing.Color.DarkViolet;
             this.btnSidsearch.Location = new System.Drawing.Point(166, 105);
             this.btnSidsearch.Name = "btnSidsearch";
             this.btnSidsearch.Size = new System.Drawing.Size(94, 29);
@@ -313,8 +322,8 @@
             // 
             // StudentManage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1812, 903);
             this.Controls.Add(this.lblteacher);
             this.Controls.Add(this.label2);

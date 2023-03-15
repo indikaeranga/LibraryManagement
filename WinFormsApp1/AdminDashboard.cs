@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace WinFormsApp1
 {
@@ -19,10 +20,25 @@ namespace WinFormsApp1
             InitializeComponent();
             grid_load_teacher();
             grid_load_rack();
-            book_category_refresh();
+            dgvTeacher.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvrack.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             rack_refresh();
             refreshbtns_teacher();
-            grid_load_book_cat();
+            //grid_load_book_cat();
+        }
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                System.Text.StringBuilder builder = new System.Text.StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
 
         private void AdminDashboard_Load(object sender, EventArgs e)
@@ -62,13 +78,13 @@ namespace WinFormsApp1
 
             if (txtnic.Text != "" && txtname.Text != "" && txtpass.Text != "" )
             {
-                
+                string hashPassword = HashPassword(txtpass.Text);
                 try
                 {
 
                     SqlConnection con = new SqlConnection(cn.connectionstring());
                     con.Open();
-                    string sql = "insert into Teacher_Admin (nic,name,password,phone,address,access) values  ('" + txtnic.Text + "','" + txtname.Text + "','" + txtpass.Text + "','" + txtphone.Text + "' "+
+                    string sql = "insert into Teacher_Admin (nic,name,password,phone,address,access) values  ('" + txtnic.Text + "','" + txtname.Text + "','" + hashPassword + "','" + txtphone.Text + "' "+
                         ", '" + txtaddress.Text + "'," + rbvalue + ") ";
 
                     SqlCommand cmd = new SqlCommand(sql, con);
@@ -114,35 +130,41 @@ namespace WinFormsApp1
         private void btnupdate_Click(object sender, EventArgs e)
         {
             int rbvalue = admin_radiobtn_value();
-            if (txtnic.Text != "" && txtname.Text != "" && txtpass.Text != "")
+            if (txtnic.Text != "" && txtname.Text != "")
             {
-                try
+                DialogResult result = MessageBox.Show("Are you sure you want to UPDATE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
 
-                    SqlConnection con = new SqlConnection(cn.connectionstring());
-                    con.Open();
-                    string sql = "update Teacher_Admin set "+
-                        "nic = '"+txtnic.Text+"', "+
-                        "name = '" + txtname.Text + "' , password = '" + txtpass.Text + "' ,"+
-                        "phone = '" + txtphone.Text + "' , access = '"+rbvalue +"' "+
-                        " where id = '"+dgvTeacher.SelectedRows[0].Cells[0].Value.ToString()+"' ";
+                    try
+                    {
 
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    empty_box_teacher();
-                    grid_load_teacher();
-                    btnadd.Enabled = true;
-                    btndelete.Enabled = false;
-                    btnupdate.Enabled = false;
-                    MessageBox.Show("Update success");
-                }
-                catch (Exception ex)
-                {
+                        SqlConnection con = new SqlConnection(cn.connectionstring());
+                        con.Open();
+                        string sql = "update Teacher_Admin set " +
+                            "nic = '" + txtnic.Text + "', " +
+                            "name = '" + txtname.Text + "' , address = '" + txtaddress.Text + "' ," +
+                            "phone = '" + txtphone.Text + "' , access = '" + rbvalue + "' " +
+                            " where id = '" + dgvTeacher.SelectedRows[0].Cells[0].Value.ToString() + "' ";
 
-                    MessageBox.Show("invalid update. operation fail !");
-                    empty_box_teacher();
+                        SqlCommand cmd = new SqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        empty_box_teacher();
+                        grid_load_teacher();
+                        btnadd.Enabled = true;
+                        btndelete.Enabled = false;
+                        btnupdate.Enabled = false;
+                        MessageBox.Show("Update success");
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("invalid update. operation fail !");
+                        empty_box_teacher();
+                    }
                 }
+                else { }
             }
             else
             {
@@ -154,29 +176,34 @@ namespace WinFormsApp1
         {
             if (txtnic.Text != "" )
             {
-                try
+                DialogResult result = MessageBox.Show("Are you sure you want to DELETE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
+                    try
+                    {
 
-                    SqlConnection con = new SqlConnection(cn.connectionstring());
-                    con.Open();
-                    string sql = "delete from Teacher_Admin where id = '" + dgvTeacher.SelectedRows[0].Cells[0].Value.ToString() + "' ";
+                        SqlConnection con = new SqlConnection(cn.connectionstring());
+                        con.Open();
+                        string sql = "delete from Teacher_Admin where id = '" + dgvTeacher.SelectedRows[0].Cells[0].Value.ToString() + "' ";
 
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    empty_box_teacher();
-                    grid_load_teacher();
-                    btnadd.Enabled = true;
-                    btndelete.Enabled = false;
-                    btnupdate.Enabled = false;
-                    MessageBox.Show("Deleted !");
+                        SqlCommand cmd = new SqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        empty_box_teacher();
+                        grid_load_teacher();
+                        btnadd.Enabled = true;
+                        btndelete.Enabled = false;
+                        btnupdate.Enabled = false;
+                        MessageBox.Show("Deleted !");
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("Not Delete. operation fail !");
+                        empty_box_teacher();
+                    }
                 }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show("Not Delete. operation fail !");
-                    empty_box_teacher();
-                }
+                else { }
             }
             else
             {
@@ -190,7 +217,7 @@ namespace WinFormsApp1
             {
                 txtnic.Text = dgvTeacher.SelectedRows[0].Cells[1].Value.ToString();
                 txtname.Text = dgvTeacher.SelectedRows[0].Cells[2].Value.ToString();
-                txtpass.Text = dgvTeacher.SelectedRows[0].Cells[3].Value.ToString();
+               // txtpass.Text = dgvTeacher.SelectedRows[0].Cells[3].Value.ToString();
                 txtphone.Text = dgvTeacher.SelectedRows[0].Cells[4].Value.ToString();
                 txtaddress.Text = dgvTeacher.SelectedRows[0].Cells[5].Value.ToString();
                 btnadd.Enabled = false;
@@ -278,28 +305,33 @@ namespace WinFormsApp1
         {
             if (txtrid.Text != "" && txtrname.Text != "")
             {
-                try
+                DialogResult result = MessageBox.Show("Are you sure you want to UPDATE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
+                    try
+                    {
 
-                    SqlConnection con = new SqlConnection(cn.connectionstring());
-                    con.Open();
-                    string sql = "update rack set " +
-                        "Rack_Name_ID = '" + txtrid.Text + "' ,Remark= '" + txtrname.Text+"' "+
-                        "where id = '"+ dgvrack.SelectedRows[0].Cells[0].Value.ToString() + "'";
+                        SqlConnection con = new SqlConnection(cn.connectionstring());
+                        con.Open();
+                        string sql = "update rack set " +
+                            "Rack_Name_ID = '" + txtrid.Text + "' ,Remark= '" + txtrname.Text + "' " +
+                            "where id = '" + dgvrack.SelectedRows[0].Cells[0].Value.ToString() + "'";
 
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    grid_load_rack();
-                    rack_refresh();
-                    MessageBox.Show("Rack update success");
+                        SqlCommand cmd = new SqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        grid_load_rack();
+                        rack_refresh();
+                        MessageBox.Show("Rack update success");
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("invalid update. operation fail !");
+                        rack_refresh();
+                    }
                 }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show("invalid update. operation fail !");
-                    rack_refresh();
-                }
+                else { }
             }
             else
             {
@@ -333,26 +365,30 @@ namespace WinFormsApp1
 
         private void btnDeleteR_Click(object sender, EventArgs e)
         {
-            try
+            DialogResult result = MessageBox.Show("Are you sure you want to DELETE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
+                try
+                {
+                    SqlConnection con = new SqlConnection(cn.connectionstring());
+                    con.Open();
+                    string sql = "delete rack " +
+                        "where id = '" + dgvrack.SelectedRows[0].Cells[0].Value.ToString() + "'";
 
-                SqlConnection con = new SqlConnection(cn.connectionstring());
-                con.Open();
-                string sql = "delete rack " +
-                    "where id = '" + dgvrack.SelectedRows[0].Cells[0].Value.ToString() + "'";
-
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-                grid_load_rack();
-                rack_refresh();
-                MessageBox.Show("Rack Delete success");
+                    SqlCommand cmd = new SqlCommand(sql, con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    grid_load_rack();
+                    rack_refresh();
+                    MessageBox.Show("Rack Delete success");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("invalid Delete. operation fail !");
+                    rack_refresh(); ;
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("invalid Delete. operation fail !");
-                rack_refresh(); ;
-            }
+            else { }
         }
 
         private void dgvrack_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -401,15 +437,15 @@ namespace WinFormsApp1
                     SqlCommand cmd = new SqlCommand(sql, con);
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    book_category_refresh();
-                    grid_load_book_cat();
+                   // book_category_refresh();
+                   // grid_load_book_cat();
                     MessageBox.Show("Book Category Add success");
                 }
                 catch (Exception ex)
                 {
 
                     MessageBox.Show("invalid data insert. operation fail !");
-                    book_category_refresh();
+                   // book_category_refresh();
                 }
             }
             else
@@ -421,7 +457,7 @@ namespace WinFormsApp1
 
         private void Btnbcrefresh_Click(object sender, EventArgs e)
         {
-            book_category_refresh();
+            //book_category_refresh();
         }
 
         private void btnbcUpdate_Click(object sender, EventArgs e)
@@ -440,15 +476,15 @@ namespace WinFormsApp1
                     SqlCommand cmd = new SqlCommand(sql, con);
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    grid_load_book_cat();
-                    book_category_refresh();
+                   // grid_load_book_cat();
+                   // book_category_refresh();
                     MessageBox.Show("Book Category update success");
                 }
                 catch (Exception ex)
                 {
 
                     MessageBox.Show("invalid update. operation fail !");
-                    book_category_refresh();
+                    //book_category_refresh();
                 }
             }
             else
@@ -486,14 +522,61 @@ namespace WinFormsApp1
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
-                grid_load_book_cat();
-                book_category_refresh();
+              //  grid_load_book_cat();
+               // book_category_refresh();
                 MessageBox.Show("Book_category Delete success");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("invalid Delete. operation fail !");
-                rack_refresh(); ;
+               // rack_refresh(); ;
+            }
+        }
+
+        private void btndbpath_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.Description = "open file dialog";
+
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                string sSelectedPath = fbd.SelectedPath;
+
+                lbldbpath.Text = sSelectedPath.ToString();
+
+            }
+        }
+
+        private void btnbackup_Click(object sender, EventArgs e)
+        {
+            string date_today = DateTime.Now.ToString("yyyy-MM-dd");
+            string path = "";
+            if (lbldbpath.Text == "")
+            {
+                path = "D:";
+            }
+            else
+            {
+                path = lbldbpath.Text;
+            }
+            try
+            {
+
+
+                SqlConnection con = new SqlConnection(cn.connectionstring());
+                con.Open();
+                string str = "USE library;";
+                string str1 = "BACKUP DATABASE library TO DISK = '" + path + "/"+ date_today + "library.Bak' WITH FORMAT,MEDIANAME = 'Z_SQLServerBackups',NAME = 'Full Backup of library';";
+                SqlCommand cmd1 = new SqlCommand(str, con);
+                SqlCommand cmd2 = new SqlCommand(str1, con);
+                cmd1.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
+                MessageBox.Show("success");
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error :" + ex);
             }
         }
     }

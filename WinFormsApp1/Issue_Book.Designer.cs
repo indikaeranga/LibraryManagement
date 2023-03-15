@@ -102,10 +102,12 @@
             this.groupBox1.Size = new System.Drawing.Size(851, 272);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Issue a Book";
             // 
             // btnissue
             // 
+            this.btnissue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnissue.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnissue.Location = new System.Drawing.Point(284, 221);
             this.btnissue.Name = "btnissue";
             this.btnissue.Size = new System.Drawing.Size(94, 29);
@@ -116,6 +118,8 @@
             // 
             // btnverify
             // 
+            this.btnverify.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnverify.ForeColor = System.Drawing.Color.Green;
             this.btnverify.Location = new System.Drawing.Point(128, 221);
             this.btnverify.Name = "btnverify";
             this.btnverify.Size = new System.Drawing.Size(94, 29);
@@ -129,18 +133,16 @@
             this.lblstudent.AutoSize = true;
             this.lblstudent.Location = new System.Drawing.Point(412, 94);
             this.lblstudent.Name = "lblstudent";
-            this.lblstudent.Size = new System.Drawing.Size(50, 20);
+            this.lblstudent.Size = new System.Drawing.Size(0, 20);
             this.lblstudent.TabIndex = 9;
-            this.lblstudent.Text = "label8";
             // 
             // lblBook
             // 
             this.lblBook.AutoSize = true;
             this.lblBook.Location = new System.Drawing.Point(412, 53);
             this.lblBook.Name = "lblBook";
-            this.lblBook.Size = new System.Drawing.Size(50, 20);
+            this.lblBook.Size = new System.Drawing.Size(0, 20);
             this.lblBook.TabIndex = 8;
-            this.lblBook.Text = "label7";
             // 
             // dtpdue
             // 
@@ -248,8 +250,8 @@
             // 
             // Issue_Book
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1812, 903);
             this.Controls.Add(this.dgvreturn);
             this.Controls.Add(this.label8);

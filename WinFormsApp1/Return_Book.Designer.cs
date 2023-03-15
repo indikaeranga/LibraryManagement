@@ -44,9 +44,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnaccept = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnsearchbybookid = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtbookidsearch = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.btnsearch = new System.Windows.Forms.Button();
             this.txtstdit = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnrefresh = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.dgvreturn = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
@@ -60,7 +65,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(43, 27);
+            this.label1.Location = new System.Drawing.Point(25, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 18);
             this.label1.TabIndex = 0;
@@ -69,7 +74,7 @@
             // lblteacher
             // 
             this.lblteacher.AutoSize = true;
-            this.lblteacher.Location = new System.Drawing.Point(125, 25);
+            this.lblteacher.Location = new System.Drawing.Point(128, 26);
             this.lblteacher.Name = "lblteacher";
             this.lblteacher.Size = new System.Drawing.Size(50, 20);
             this.lblteacher.TabIndex = 1;
@@ -93,7 +98,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtissue);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(587, 64);
+            this.groupBox1.Location = new System.Drawing.Point(1355, 69);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(430, 231);
             this.groupBox1.TabIndex = 3;
@@ -109,6 +114,8 @@
             // 
             // btncheck
             // 
+            this.btncheck.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btncheck.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btncheck.Location = new System.Drawing.Point(164, 159);
             this.btncheck.Name = "btncheck";
             this.btncheck.Size = new System.Drawing.Size(94, 29);
@@ -128,6 +135,7 @@
             // 
             // txtissue
             // 
+            this.txtissue.Enabled = false;
             this.txtissue.Location = new System.Drawing.Point(164, 55);
             this.txtissue.Name = "txtissue";
             this.txtissue.Size = new System.Drawing.Size(224, 27);
@@ -153,6 +161,7 @@
             // 
             // txtbook
             // 
+            this.txtbook.Enabled = false;
             this.txtbook.Location = new System.Drawing.Point(168, 52);
             this.txtbook.Name = "txtbook";
             this.txtbook.Size = new System.Drawing.Size(224, 27);
@@ -165,7 +174,7 @@
             this.groupBox2.Controls.Add(this.btnaccept);
             this.groupBox2.Controls.Add(this.txtbook);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(25, 64);
+            this.groupBox2.Location = new System.Drawing.Point(784, 69);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(435, 228);
             this.groupBox2.TabIndex = 4;
@@ -190,6 +199,8 @@
             // 
             // btnaccept
             // 
+            this.btnaccept.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnaccept.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnaccept.Location = new System.Drawing.Point(168, 156);
             this.btnaccept.Name = "btnaccept";
             this.btnaccept.Size = new System.Drawing.Size(94, 29);
@@ -200,19 +211,62 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnsearchbybookid);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.txtbookidsearch);
+            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.btnsearch);
             this.groupBox3.Controls.Add(this.txtstdit);
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Location = new System.Drawing.Point(1236, 64);
+            this.groupBox3.Location = new System.Drawing.Point(25, 64);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(549, 228);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Check Books to return by Student ID";
+            this.groupBox3.Text = "Check Books to Return";
+            // 
+            // btnsearchbybookid
+            // 
+            this.btnsearchbybookid.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnsearchbybookid.ForeColor = System.Drawing.Color.DarkViolet;
+            this.btnsearchbybookid.Location = new System.Drawing.Point(354, 124);
+            this.btnsearchbybookid.Name = "btnsearchbybookid";
+            this.btnsearchbybookid.Size = new System.Drawing.Size(94, 29);
+            this.btnsearchbybookid.TabIndex = 7;
+            this.btnsearchbybookid.Text = "Search";
+            this.btnsearchbybookid.UseVisualStyleBackColor = true;
+            this.btnsearchbybookid.Click += new System.EventHandler(this.btnsearchbybookid_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(133, 90);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 20);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "OR";
+            // 
+            // txtbookidsearch
+            // 
+            this.txtbookidsearch.Location = new System.Drawing.Point(133, 126);
+            this.txtbookidsearch.Name = "txtbookidsearch";
+            this.txtbookidsearch.Size = new System.Drawing.Size(182, 27);
+            this.txtbookidsearch.TabIndex = 5;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(31, 133);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(62, 20);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Book ID";
             // 
             // btnsearch
             // 
-            this.btnsearch.Location = new System.Drawing.Point(173, 102);
+            this.btnsearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnsearch.ForeColor = System.Drawing.Color.Magenta;
+            this.btnsearch.Location = new System.Drawing.Point(354, 46);
             this.btnsearch.Name = "btnsearch";
             this.btnsearch.Size = new System.Drawing.Size(94, 29);
             this.btnsearch.TabIndex = 2;
@@ -222,25 +276,37 @@
             // 
             // txtstdit
             // 
-            this.txtstdit.Location = new System.Drawing.Point(173, 48);
+            this.txtstdit.Location = new System.Drawing.Point(133, 48);
             this.txtstdit.Name = "txtstdit";
-            this.txtstdit.Size = new System.Drawing.Size(235, 27);
+            this.txtstdit.Size = new System.Drawing.Size(182, 27);
             this.txtstdit.TabIndex = 1;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(55, 55);
+            this.label7.Location = new System.Drawing.Point(31, 55);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(79, 20);
             this.label7.TabIndex = 0;
             this.label7.Text = "Student ID";
             // 
+            // btnrefresh
+            // 
+            this.btnrefresh.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnrefresh.ForeColor = System.Drawing.Color.Green;
+            this.btnrefresh.Location = new System.Drawing.Point(446, 306);
+            this.btnrefresh.Name = "btnrefresh";
+            this.btnrefresh.Size = new System.Drawing.Size(128, 29);
+            this.btnrefresh.TabIndex = 3;
+            this.btnrefresh.Text = "Refresh Fields";
+            this.btnrefresh.UseVisualStyleBackColor = true;
+            this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(504, 152);
+            this.label8.Location = new System.Drawing.Point(1267, 168);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 18);
             this.label8.TabIndex = 6;
@@ -261,20 +327,22 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1236, 310);
+            this.label9.Location = new System.Drawing.Point(25, 310);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(294, 20);
             this.label9.TabIndex = 3;
             this.label9.Text = "If data available double click row for select";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // Return_Book
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1812, 903);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.dgvreturn);
             this.Controls.Add(this.label8);
+            this.Controls.Add(this.btnrefresh);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -320,5 +388,10 @@
         private Label label8;
         private DataGridView dgvreturn;
         private Label label9;
+        private Button btnrefresh;
+        private Button btnsearchbybookid;
+        private Label label11;
+        private TextBox txtbookidsearch;
+        private Label label10;
     }
 }

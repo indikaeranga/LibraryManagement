@@ -14,11 +14,13 @@ namespace WinFormsApp1
     public partial class StudentManage : Form
     {
         ConString cn = new ConString();
-        public StudentManage(string teacher)
+        public StudentManage(string teacher, Size formSize)
         {
             InitializeComponent();
+            this.Size = formSize;
             grid_load_Student();
             refresh_student();
+            dgvstudentlist.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             lblteacher.Text = teacher;
         }
 
@@ -96,25 +98,30 @@ namespace WinFormsApp1
             string address = txtsaddress.Text;
             if (sid != "" && name != "")
             {
-                try
+                DialogResult result = MessageBox.Show("Are you sure you want to UPDATE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    SqlConnection con = new SqlConnection(cn.connectionstring());
-                    con.Open();
-                    string sql = "update student set name = '" + name + "',birthdate = '" + birthdate + "',grade = '" + grade + "', " +
-                        "phone = '" + phone + "',address = '" + address + "'" +
-                        " where StdID =  '" + sid + "'";
+                    try
+                    {
+                        SqlConnection con = new SqlConnection(cn.connectionstring());
+                        con.Open();
+                        string sql = "update student set name = '" + name + "',birthdate = '" + birthdate + "',grade = '" + grade + "', " +
+                            "phone = '" + phone + "',address = '" + address + "'" +
+                            " where StdID =  '" + sid + "'";
 
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Student Update success");
-                    grid_load_Student();
-                    refresh_student();
+                        SqlCommand cmd = new SqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Student Update success");
+                        grid_load_Student();
+                        refresh_student();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("invalid data Update. operation fail !");
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("invalid data Update. operation fail !");
-                }
+                else { }
             }
             else
             {
@@ -127,27 +134,31 @@ namespace WinFormsApp1
             string sid = txtsid.Text;
             if (sid != "")
             {
-                try
+                DialogResult result = MessageBox.Show("Are you sure you want to DELETE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
+                    try
+                    {
 
-                    SqlConnection con = new SqlConnection(cn.connectionstring());
-                    con.Open();
-                    string sql = "delete from student where stdid = '" + sid + "' ";
+                        SqlConnection con = new SqlConnection(cn.connectionstring());
+                        con.Open();
+                        string sql = "delete from student where stdid = '" + sid + "' ";
 
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    btnSadd.Enabled = true;
-                    btnSdelete.Enabled = false;
-                    btnSupdate.Enabled = false;
-                    MessageBox.Show("Deleted !");
-                    grid_load_Student();
-                    refresh_student();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Not Delete. operation fail !");
-                }
+                        SqlCommand cmd = new SqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        btnSadd.Enabled = true;
+                        btnSdelete.Enabled = false;
+                        btnSupdate.Enabled = false;
+                        MessageBox.Show("Deleted !");
+                        grid_load_Student();
+                        refresh_student();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Not Delete. operation fail !");
+                    }
+                }else { }
             }
             else
             {

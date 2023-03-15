@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblteacher = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnreport = new System.Windows.Forms.Button();
             this.lblstudent = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvhandover = new System.Windows.Forms.DataGridView();
@@ -67,6 +68,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnreport);
             this.groupBox1.Controls.Add(this.lblstudent);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.dgvhandover);
@@ -79,10 +81,22 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
+            // btnreport
+            // 
+            this.btnreport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnreport.ForeColor = System.Drawing.Color.Green;
+            this.btnreport.Location = new System.Drawing.Point(654, 39);
+            this.btnreport.Name = "btnreport";
+            this.btnreport.Size = new System.Drawing.Size(180, 29);
+            this.btnreport.TabIndex = 6;
+            this.btnreport.Text = "Print Student Report";
+            this.btnreport.UseVisualStyleBackColor = true;
+            this.btnreport.Click += new System.EventHandler(this.btnreport_Click);
+            // 
             // lblstudent
             // 
             this.lblstudent.AutoSize = true;
-            this.lblstudent.Location = new System.Drawing.Point(216, 98);
+            this.lblstudent.Location = new System.Drawing.Point(216, 87);
             this.lblstudent.Name = "lblstudent";
             this.lblstudent.Size = new System.Drawing.Size(0, 20);
             this.lblstudent.TabIndex = 5;
@@ -90,7 +104,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 98);
+            this.label3.Location = new System.Drawing.Point(23, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(173, 20);
             this.label3.TabIndex = 4;
@@ -100,16 +114,18 @@
             // 
             this.dgvhandover.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvhandover.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvhandover.Location = new System.Drawing.Point(6, 140);
+            this.dgvhandover.Location = new System.Drawing.Point(6, 121);
             this.dgvhandover.Name = "dgvhandover";
             this.dgvhandover.RowHeadersWidth = 51;
             this.dgvhandover.RowTemplate.Height = 29;
-            this.dgvhandover.Size = new System.Drawing.Size(870, 684);
+            this.dgvhandover.Size = new System.Drawing.Size(870, 703);
             this.dgvhandover.TabIndex = 3;
             // 
             // btnsearch
             // 
-            this.btnsearch.Location = new System.Drawing.Point(445, 39);
+            this.btnsearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnsearch.ForeColor = System.Drawing.Color.DarkViolet;
+            this.btnsearch.Location = new System.Drawing.Point(317, 38);
             this.btnsearch.Name = "btnsearch";
             this.btnsearch.Size = new System.Drawing.Size(94, 29);
             this.btnsearch.TabIndex = 2;
@@ -119,7 +135,7 @@
             // 
             // txtstdid
             // 
-            this.txtstdid.Location = new System.Drawing.Point(217, 41);
+            this.txtstdid.Location = new System.Drawing.Point(108, 39);
             this.txtstdid.Name = "txtstdid";
             this.txtstdid.Size = new System.Drawing.Size(193, 27);
             this.txtstdid.TabIndex = 1;
@@ -127,7 +143,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(115, 48);
+            this.label2.Location = new System.Drawing.Point(23, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 20);
             this.label2.TabIndex = 0;
@@ -167,8 +183,8 @@
             // 
             // StudentHistory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1812, 903);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox2);
@@ -202,5 +218,6 @@
         private DataGridView dgvall;
         private Label label4;
         private Label lblstudent;
+        private Button btnreport;
     }
 }

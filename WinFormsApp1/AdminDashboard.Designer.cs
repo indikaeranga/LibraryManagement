@@ -30,6 +30,9 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.rbteacher = new System.Windows.Forms.RadioButton();
             this.rbadmin = new System.Windows.Forms.RadioButton();
             this.label13 = new System.Windows.Forms.Label();
@@ -77,6 +80,11 @@
             this.txtrid = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.btnbackup = new System.Windows.Forms.Button();
+            this.btndbpath = new System.Windows.Forms.Button();
+            this.lbldbpath = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeacher)).BeginInit();
@@ -85,12 +93,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvbookcat)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvrack)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -99,6 +109,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label15);
+            this.tabPage1.Controls.Add(this.label14);
+            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.rbteacher);
             this.tabPage1.Controls.Add(this.rbadmin);
             this.tabPage1.Controls.Add(this.label13);
@@ -127,6 +140,33 @@
             this.tabPage1.Text = "Manage Teacher";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(40, 684);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(315, 20);
+            this.label15.TabIndex = 23;
+            this.label15.Text = "Otherwise create a new user with different NIC";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(42, 659);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(429, 20);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "If you really need to edit password, contact software developer.";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(20, 635);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(453, 20);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "(3) Password can not update on the form beacue of security reason.";
             // 
             // rbteacher
             // 
@@ -196,6 +236,8 @@
             // 
             // btnrefresh
             // 
+            this.btnrefresh.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnrefresh.ForeColor = System.Drawing.Color.Green;
             this.btnrefresh.Location = new System.Drawing.Point(345, 467);
             this.btnrefresh.Name = "btnrefresh";
             this.btnrefresh.Size = new System.Drawing.Size(94, 29);
@@ -218,6 +260,8 @@
             // 
             // btndelete
             // 
+            this.btndelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btndelete.ForeColor = System.Drawing.Color.Red;
             this.btndelete.Location = new System.Drawing.Point(237, 467);
             this.btndelete.Name = "btndelete";
             this.btndelete.Size = new System.Drawing.Size(94, 29);
@@ -228,6 +272,7 @@
             // 
             // btnupdate
             // 
+            this.btnupdate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnupdate.Location = new System.Drawing.Point(128, 467);
             this.btnupdate.Name = "btnupdate";
             this.btnupdate.Size = new System.Drawing.Size(94, 29);
@@ -238,6 +283,8 @@
             // 
             // btnadd
             // 
+            this.btnadd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnadd.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnadd.Location = new System.Drawing.Point(20, 467);
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(94, 29);
@@ -318,7 +365,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1780, 807);
+            this.tabPage2.Size = new System.Drawing.Size(1780, 846);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Manage Rack & Book Categories";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -380,6 +427,7 @@
             // 
             // Btnbcrefresh
             // 
+            this.Btnbcrefresh.Enabled = false;
             this.Btnbcrefresh.Location = new System.Drawing.Point(652, 203);
             this.Btnbcrefresh.Name = "Btnbcrefresh";
             this.Btnbcrefresh.Size = new System.Drawing.Size(94, 29);
@@ -390,6 +438,7 @@
             // 
             // btnbcDel
             // 
+            this.btnbcDel.Enabled = false;
             this.btnbcDel.Location = new System.Drawing.Point(529, 203);
             this.btnbcDel.Name = "btnbcDel";
             this.btnbcDel.Size = new System.Drawing.Size(94, 29);
@@ -400,6 +449,7 @@
             // 
             // btnbcUpdate
             // 
+            this.btnbcUpdate.Enabled = false;
             this.btnbcUpdate.Location = new System.Drawing.Point(411, 203);
             this.btnbcUpdate.Name = "btnbcUpdate";
             this.btnbcUpdate.Size = new System.Drawing.Size(94, 29);
@@ -410,6 +460,7 @@
             // 
             // btnbcadd
             // 
+            this.btnbcadd.Enabled = false;
             this.btnbcadd.Location = new System.Drawing.Point(291, 203);
             this.btnbcadd.Name = "btnbcadd";
             this.btnbcadd.Size = new System.Drawing.Size(94, 29);
@@ -580,10 +631,61 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Rack Name / ID *";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.btnbackup);
+            this.tabPage3.Controls.Add(this.btndbpath);
+            this.tabPage3.Controls.Add(this.lbldbpath);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1780, 846);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Backup Database";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(327, 110);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(312, 20);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Please select D or E drive to backup Database";
+            // 
+            // btnbackup
+            // 
+            this.btnbackup.Location = new System.Drawing.Point(862, 159);
+            this.btnbackup.Name = "btnbackup";
+            this.btnbackup.Size = new System.Drawing.Size(94, 29);
+            this.btnbackup.TabIndex = 2;
+            this.btnbackup.Text = "Backup DB";
+            this.btnbackup.UseVisualStyleBackColor = true;
+            this.btnbackup.Click += new System.EventHandler(this.btnbackup_Click);
+            // 
+            // btndbpath
+            // 
+            this.btndbpath.Location = new System.Drawing.Point(115, 161);
+            this.btndbpath.Name = "btndbpath";
+            this.btndbpath.Size = new System.Drawing.Size(137, 29);
+            this.btndbpath.TabIndex = 1;
+            this.btndbpath.Text = "Select File Path";
+            this.btndbpath.UseVisualStyleBackColor = true;
+            this.btndbpath.Click += new System.EventHandler(this.btndbpath_Click);
+            // 
+            // lbldbpath
+            // 
+            this.lbldbpath.AutoSize = true;
+            this.lbldbpath.Location = new System.Drawing.Point(329, 165);
+            this.lbldbpath.Name = "lbldbpath";
+            this.lbldbpath.Size = new System.Drawing.Size(39, 20);
+            this.lbldbpath.TabIndex = 0;
+            this.lbldbpath.Text = "path";
+            // 
             // AdminDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1812, 903);
             this.Controls.Add(this.tabControl1);
             this.Name = "AdminDashboard";
@@ -601,6 +703,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvrack)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -656,5 +760,13 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn Rack_Name_ID;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private Label label9;
+        private Label label15;
+        private Label label14;
+        private TabPage tabPage3;
+        private Button btndbpath;
+        private Label lbldbpath;
+        private Button btnbackup;
+        private Label label16;
     }
 }

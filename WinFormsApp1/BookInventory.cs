@@ -15,9 +15,10 @@ namespace WinFormsApp1
     {
         ConString cn = new ConString();
         
-        public BookInventory( String TeacherName)
+        public BookInventory( String TeacherName, Size formSize)
         {
             InitializeComponent();
+            this.Size = formSize;
             grid_load_Book();
             cmBI_rack_load();
             grid_load_book_Inventory();
@@ -66,7 +67,7 @@ namespace WinFormsApp1
         {
             SqlConnection con = new SqlConnection(cn.connectionstring());
             con.Open();
-            string sql = "select * from Book_Inventory";
+            string sql = "select Book_ID,ISBN,Rack,Publish_Date,Take_Method,Price,Quantity,Teacher from Book_Inventory";
             SqlCommand cmd = new SqlCommand(sql, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dta = new DataTable();
@@ -94,7 +95,7 @@ namespace WinFormsApp1
         }
 
        
-        private void btnBadd_Click(object sender, EventArgs e)
+        private void btnBadd_Click(object sender, EventArgs e)  //ISBN add
         {
             
             string firststpublish = dtp1stpublish.Value.ToString("yyyy-MM-dd");
@@ -158,26 +159,30 @@ namespace WinFormsApp1
             string printing = txtBprint.Text;
             if (txtBisbn.Text != "" && txtBname.Text != "")
             {
-                try
+                DialogResult result = MessageBox.Show("Are you sure you want to UPDATE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    SqlConnection con = new SqlConnection(cn.connectionstring());
-                    con.Open();
-                    string sql = "update Book set name = '"+ name + "',author = '" + author + "',description = '" + desc + "', "+
-                        "First_Publish = '" + firststpublish + "',Publisher = '" + publisher + "' ,pages = '" + pages + "',"+
-                        "printing = '" + printing + "'" +
-                        " where ISBN =  '" + ISBN + "'";
+                    try
+                    {
+                        SqlConnection con = new SqlConnection(cn.connectionstring());
+                        con.Open();
+                        string sql = "update Book set name = '" + name + "',author = '" + author + "',description = '" + desc + "', " +
+                            "First_Publish = '" + firststpublish + "',Publisher = '" + publisher + "' ,pages = '" + pages + "'," +
+                            "printing = '" + printing + "'" +
+                            " where ISBN =  '" + ISBN + "'";
 
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Book Update success");
-                    grid_load_Book();
-                    refresh_book();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("invalid data Update. operation fail !");
-                }
+                        SqlCommand cmd = new SqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Book Update success");
+                        grid_load_Book();
+                        refresh_book();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("invalid data Update. operation fail !");
+                    }
+                }else { }
             }
             else
             {
@@ -210,31 +215,36 @@ namespace WinFormsApp1
             }
         }
 
-        private void btnBdelete_Click(object sender, EventArgs e)
+        private void btnBdelete_Click(object sender, EventArgs e)  // ISBN Delete
         {
             if (txtBisbn.Text != "")
             {
-                try
+                DialogResult result = MessageBox.Show("Are you sure you want to DELETE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
+                    try
+                    {
 
-                    SqlConnection con = new SqlConnection(cn.connectionstring());
-                    con.Open();
-                    string sql = "delete from book where ISBN = '" + dgvBook.SelectedRows[0].Cells[0].Value.ToString() + "' ";
+                        SqlConnection con = new SqlConnection(cn.connectionstring());
+                        con.Open();
+                        string sql = "delete from book where ISBN = '" + dgvBook.SelectedRows[0].Cells[0].Value.ToString() + "' ";
 
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    btnBadd.Enabled = true;
-                    btnBdelete.Enabled = false;
-                    btnBupdate.Enabled = false;
-                    MessageBox.Show("Deleted !");
-                    grid_load_Book();
-                    refresh_book();
+                        SqlCommand cmd = new SqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        btnBadd.Enabled = true;
+                        btnBdelete.Enabled = false;
+                        btnBupdate.Enabled = false;
+                        MessageBox.Show("Deleted !");
+                        grid_load_Book();
+                        refresh_book();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Not Delete. operation fail !");
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Not Delete. operation fail !");                   
-                }
+                else { }
             }
             else
             {
@@ -242,7 +252,7 @@ namespace WinFormsApp1
             }
         }
 
-        private void btnBsearch_Click(object sender, EventArgs e)
+        private void btnBsearch_Click(object sender, EventArgs e) //ISBN Search
         {
             string isbn = txtBsearch.Text;
             try
@@ -331,25 +341,18 @@ namespace WinFormsApp1
 
         public void cmBI_rack_load()   //load Rack combo box in book inventory tab
         {
-            try
-            {
-                SqlConnection con = new SqlConnection(cn.connectionstring());
-                con.Open();
-                string sql = "select Rack_Name_ID from rack";
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dta = new DataTable();
-                da.Fill(dta);
-                cmBIrack.DisplayMember = "Rack_Name_ID";
-                //cmBIrack.ValueMember = "Rack_Name_ID";
-                cmBIrack.DataSource = dta;
-                cmBIrack.SelectedIndex = -1;
-                con.Close();
-            }catch (Exception ex) {
-            
-                MessageBox.Show("Rack selection error please select again");
-            }
+            SqlConnection con2 = new SqlConnection(cn.connectionstring());
+            con2.Open();
+            string sql = "select rack_name_id from Rack";
+            SqlCommand cmd = new SqlCommand(sql, con2);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dta = new DataTable();
+            da.Fill(dta);
+            cmBIrack.DisplayMember = "rack_name_id";
+            cmBIrack.ValueMember = "rack_name_id";
+            cmBIrack.DataSource = dta;
+            cmBIrack.SelectedIndex = -1;
+            con2.Close();
         }
         private int Book_Inv_radiobtn_value()
         {
@@ -388,6 +391,7 @@ namespace WinFormsApp1
             string rack = cmBIrack.Text;
             string Publish_Date = dtpBIpublishdate.Value.ToString("yyyy-MM-dd");
             int rbBIvalue = Book_Inv_radiobtn_value(); // buy,donate or government
+            string date_today = DateTime.Now.ToString("yyyy-MM-dd");
             double price = 0;
             if(txtBIprice.Text == null || txtBIprice.Text == "") { price = 0; }  
             else { price = Convert.ToDouble(txtBIprice.Text);  }
@@ -401,9 +405,9 @@ namespace WinFormsApp1
                 {
                     SqlConnection con = new SqlConnection(cn.connectionstring());
                     con.Open();
-                    string sql = "insert into Book_Inventory (Book_ID,isbn,rack,Publish_Date,Take_Method,price,Quantity,teacher)" +
+                    string sql = "insert into Book_Inventory (Book_ID,isbn,rack,Publish_Date,Take_Method,price,Quantity,teacher,date)" +
                         " values  ('" + Book_ID + "','" + isbn + "','" + rack + "','" + Publish_Date + "', " +
-                        " '" + rbBIvalue + "','" + price + "','" + quantity + "','" + teacher + "') ";
+                        " '" + rbBIvalue + "','" + price + "','" + quantity + "','" + teacher + "' , '"+date_today+"') ";
 
                     SqlCommand cmd = new SqlCommand(sql, con);
                     cmd.ExecuteNonQuery();
@@ -431,8 +435,7 @@ namespace WinFormsApp1
 
         private void book_inv_update()
         {
-            string id = dgvBookInv.SelectedRows[0].Cells[0].Value.ToString();
-            string bookid = txtBIbookid.Text;
+            string bookid = dgvBookInv.SelectedRows[0].Cells[0].Value.ToString();
             string isbn = txtBInvISBN.Text;
             string rack = cmBIrack.Text;
             string Publish_Date = dtpBIpublishdate.Value.ToString("yyyy-MM-dd");
@@ -446,26 +449,31 @@ namespace WinFormsApp1
             string teacher = lblteacher.Text; 
             if (bookid != "" && isbn != "")
             {
-                try
+                DialogResult result = MessageBox.Show("Are you sure you want to UPDATE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    SqlConnection con = new SqlConnection(cn.connectionstring());
-                    con.Open();
-                    string sql = "update Book_Inventory set Book_ID = '" + bookid + "',isbn = '" + isbn + "',rack = '" + rack + "', " +
-                        "Publish_Date = '" + Publish_Date + "',Take_Method = '" + rbBIvalue + "' ,price = '" + price + "'," +
-                        "Quantity = '" + quantity + "', Teacher = '"+teacher+"'" +
-                        " where id =  '" + id + "'";
+                    try
+                    {
+                        SqlConnection con = new SqlConnection(cn.connectionstring());
+                        con.Open();
+                        string sql = "update Book_Inventory set isbn = '" + isbn + "',rack = '" + rack + "', " +
+                            "Publish_Date = '" + Publish_Date + "',Take_Method = '" + rbBIvalue + "' ,price = '" + price + "'," +
+                            "Quantity = '" + quantity + "', Teacher = '" + teacher + "'" +
+                            " where Book_ID =  '" + bookid + "'";
 
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Book Inventory Update success.");
-                    grid_load_book_Inventory();
-                    book_inventory_refreshbtn();
+                        SqlCommand cmd = new SqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Book Inventory Update success.");
+                        grid_load_book_Inventory();
+                        book_inventory_refreshbtn();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("invalid data Update. operation fail !");
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("invalid data Update. operation fail !");
-                }
+                else { }
             }
             else
             {
@@ -529,6 +537,7 @@ namespace WinFormsApp1
             btnBIadd.Enabled = true;
             btnBIdelete.Enabled = false;
             btnBIupdate.Enabled = false;
+            txtBIbookid.Enabled = true;
         }
 
         private void btnBIchk_ISBN_Click(object sender, EventArgs e)
@@ -537,7 +546,7 @@ namespace WinFormsApp1
             try
             {
                 SqlConnection con = new SqlConnection(cn.connectionstring());
-                string sql = "select id,Book_ID,isbn,rack,Publish_Date,Take_Method,price,Quantity,teacher " +
+                string sql = "select Book_ID,isbn,rack,Publish_Date,Take_Method,price,Quantity,teacher " +
                     " from book_inventory where isbn = '" + isbn + "'";
                 con.Open();
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -605,6 +614,7 @@ namespace WinFormsApp1
                 else
                 {
                     MessageBox.Show("Book Not Registered with ISBN. Please add book before Add to the inventory.");
+                    lblBIBname.Text = "";
                 }
                 con.Close();
                 //refresh_book();
@@ -612,6 +622,7 @@ namespace WinFormsApp1
             catch (Exception ex)
             {
                 MessageBox.Show("error : ISBN empty");
+                lblBIBname.Text = "";
             }
             
 
@@ -623,7 +634,7 @@ namespace WinFormsApp1
             try
             {
                 SqlConnection con = new SqlConnection(cn.connectionstring());
-                string sql = "select * " +
+                string sql = "select Book_ID,isbn,rack,Publish_Date,Take_Method,price,Quantity,teacher " +
                     " from Book_Inventory where Book_ID = '" + Book_ID + "'";
                 con.Open();
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -645,7 +656,7 @@ namespace WinFormsApp1
             try
             {
                 SqlConnection con = new SqlConnection(cn.connectionstring());
-                string sql = "select * " +
+                string sql = "select Book_ID,isbn,rack,Publish_Date,Take_Method,price,Quantity,teacher " +
                     " from Book_Inventory where Book_ID like '" + Book_ID + "%'";
                 con.Open();
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -667,7 +678,7 @@ namespace WinFormsApp1
             try
             {
                 SqlConnection con = new SqlConnection(cn.connectionstring());
-                string sql = "select * " +
+                string sql = "select Book_ID,isbn,rack,Publish_Date,Take_Method,price,Quantity,teacher " +
                     " from Book_Inventory where ISBN like '" + isbn + "%'";
                 con.Open();
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -694,7 +705,7 @@ namespace WinFormsApp1
             try
             {
                 SqlConnection con = new SqlConnection(cn.connectionstring());
-                string sql = "select * " +
+                string sql = "select Book_ID,isbn,rack,Publish_Date,Take_Method,price,Quantity,teacher " +
                     " from Book_Inventory where ISBN = '" + isbn + "'";
                 con.Open();
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -722,10 +733,11 @@ namespace WinFormsApp1
 
         private void cmBIrack_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmBIrack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            cmBIrack.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmBIrack.AutoCompleteSource = AutoCompleteSource.ListItems;
             
+                cmBIrack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+                cmBIrack.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmBIrack.AutoCompleteSource = AutoCompleteSource.ListItems;
+           
         }
         private void cmBIrack_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -736,16 +748,17 @@ namespace WinFormsApp1
         {
             try
             {
-                txtBIbookid.Text = dgvBookInv.SelectedRows[0].Cells[1].Value.ToString();
-                txtBInvISBN.Text = dgvBookInv.SelectedRows[0].Cells[2].Value.ToString();
-                cmBIrack.Text = dgvBookInv.SelectedRows[0].Cells[3].Value.ToString();
-                dtpBIpublishdate.Text = dgvBookInv.SelectedRows[0].Cells[4].Value.ToString();
-                Book_Inv_radiobtn_value_update(Convert.ToInt32(dgvBookInv.SelectedRows[0].Cells[5].Value.ToString())); // set radio buttons
-                txtBIprice.Text = dgvBookInv.SelectedRows[0].Cells[6].Value.ToString();
-                txtBIquantity.Text = dgvBookInv.SelectedRows[0].Cells[7].Value.ToString();
+                txtBIbookid.Text = dgvBookInv.SelectedRows[0].Cells[0].Value.ToString();
+                txtBInvISBN.Text = dgvBookInv.SelectedRows[0].Cells[1].Value.ToString();
+                cmBIrack.Text = dgvBookInv.SelectedRows[0].Cells[2].Value.ToString();
+                dtpBIpublishdate.Text = dgvBookInv.SelectedRows[0].Cells[3].Value.ToString();
+                Book_Inv_radiobtn_value_update(Convert.ToInt32(dgvBookInv.SelectedRows[0].Cells[4].Value.ToString())); // set radio buttons
+                txtBIprice.Text = dgvBookInv.SelectedRows[0].Cells[5].Value.ToString();
+                txtBIquantity.Text = dgvBookInv.SelectedRows[0].Cells[6].Value.ToString();
                 btnBIadd.Enabled = false;
                 btnBIdelete.Enabled = true;
                 btnBIupdate.Enabled = true;
+                txtBIbookid.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -770,27 +783,32 @@ namespace WinFormsApp1
         {
             if (txtBIbookid.Text != "")
             {
-                try
+                DialogResult result = MessageBox.Show("Are you sure you want to DELETE this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
+                    try
+                    {
 
-                    SqlConnection con = new SqlConnection(cn.connectionstring());
-                    con.Open();
-                    string sql = "delete from Book_Inventory where Id = '" + dgvBookInv.SelectedRows[0].Cells[0].Value.ToString() + "' ";
+                        SqlConnection con = new SqlConnection(cn.connectionstring());
+                        con.Open();
+                        string sql = "delete from Book_Inventory where Book_ID = '" + dgvBookInv.SelectedRows[0].Cells[0].Value.ToString() + "' ";
 
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    btnBIadd.Enabled = true;
-                    btnBIdelete.Enabled = false;
-                    btnBIupdate.Enabled = false;
-                    grid_load_book_Inventory();
-                    book_inventory_refreshbtn();
-                    MessageBox.Show("Deleted !");
+                        SqlCommand cmd = new SqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        btnBIadd.Enabled = true;
+                        btnBIdelete.Enabled = false;
+                        btnBIupdate.Enabled = false;
+                        grid_load_book_Inventory();
+                        book_inventory_refreshbtn();
+                        MessageBox.Show("Deleted !");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Not Delete. operation fail !");
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Not Delete. operation fail !");
-                }
+                else { }
             }
             else
             {

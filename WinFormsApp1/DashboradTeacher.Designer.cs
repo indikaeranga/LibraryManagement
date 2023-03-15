@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboradTeacher));
             this.btnstudent = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,6 +39,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button11 = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -55,6 +56,8 @@
             this.lbltotalbooks = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -62,9 +65,16 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lbldue = new System.Windows.Forms.Label();
+            this.lblreturn = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnstudent
@@ -85,14 +95,14 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(179, 48);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Book Add";
+            this.button1.Text = "Add Books";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
+            this.label1.Image = global::WinFormsApp1.Properties.Resources.student_girl;
             this.label1.Location = new System.Drawing.Point(65, 56);
             this.label1.MinimumSize = new System.Drawing.Size(128, 128);
             this.label1.Name = "label1";
@@ -102,7 +112,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
+            this.label2.Image = global::WinFormsApp1.Properties.Resources.addbook_1;
             this.label2.Location = new System.Drawing.Point(289, 56);
             this.label2.MinimumSize = new System.Drawing.Size(128, 128);
             this.label2.Name = "label2";
@@ -173,6 +183,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.button11);
+            this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.label1);
@@ -183,18 +196,40 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox1.Location = new System.Drawing.Point(43, 85);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1362, 278);
+            this.groupBox1.Size = new System.Drawing.Size(1372, 278);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Manage";
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(1146, 199);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(179, 48);
+            this.button11.TabIndex = 15;
+            this.button11.Text = "Discard Book";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Image = global::WinFormsApp1.Properties.Resources.economy;
+            this.label19.Location = new System.Drawing.Point(1161, 56);
+            this.label19.MinimumSize = new System.Drawing.Size(128, 128);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(128, 128);
+            this.label19.TabIndex = 14;
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Image = global::WinFormsApp1.Properties.Resources.idea;
+            this.label15.Image = global::WinFormsApp1.Properties.Resources.bookalert;
             this.label15.Location = new System.Drawing.Point(949, 56);
             this.label15.MinimumSize = new System.Drawing.Size(128, 128);
             this.label15.Name = "label15";
@@ -210,6 +245,7 @@
             this.button4.TabIndex = 12;
             this.button4.Text = "Missing Books";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label7
             // 
@@ -235,7 +271,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Image = global::WinFormsApp1.Properties.Resources.report;
+            this.label6.Image = global::WinFormsApp1.Properties.Resources.archive;
             this.label6.Location = new System.Drawing.Point(289, 53);
             this.label6.MinimumSize = new System.Drawing.Size(128, 128);
             this.label6.Name = "label6";
@@ -246,7 +282,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(45, 64);
+            this.label8.Location = new System.Drawing.Point(70, 64);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(125, 18);
             this.label8.TabIndex = 13;
@@ -256,7 +292,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(45, 114);
+            this.label9.Location = new System.Drawing.Point(70, 114);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(123, 18);
             this.label9.TabIndex = 14;
@@ -266,7 +302,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(47, 166);
+            this.label10.Location = new System.Drawing.Point(72, 166);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(99, 18);
             this.label10.TabIndex = 15;
@@ -276,7 +312,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(45, 215);
+            this.label11.Location = new System.Drawing.Point(70, 215);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(100, 18);
             this.label11.TabIndex = 16;
@@ -285,7 +321,7 @@
             // lblteachercount
             // 
             this.lblteachercount.AutoSize = true;
-            this.lblteachercount.Location = new System.Drawing.Point(204, 64);
+            this.lblteachercount.Location = new System.Drawing.Point(199, 64);
             this.lblteachercount.Name = "lblteachercount";
             this.lblteachercount.Size = new System.Drawing.Size(50, 18);
             this.lblteachercount.TabIndex = 17;
@@ -294,7 +330,7 @@
             // lblstdcount
             // 
             this.lblstdcount.AutoSize = true;
-            this.lblstdcount.Location = new System.Drawing.Point(204, 114);
+            this.lblstdcount.Location = new System.Drawing.Point(199, 114);
             this.lblstdcount.Name = "lblstdcount";
             this.lblstdcount.Size = new System.Drawing.Size(58, 18);
             this.lblstdcount.TabIndex = 18;
@@ -303,7 +339,7 @@
             // lblisbncount
             // 
             this.lblisbncount.AutoSize = true;
-            this.lblisbncount.Location = new System.Drawing.Point(204, 166);
+            this.lblisbncount.Location = new System.Drawing.Point(199, 166);
             this.lblisbncount.Name = "lblisbncount";
             this.lblisbncount.Size = new System.Drawing.Size(58, 18);
             this.lblisbncount.TabIndex = 19;
@@ -312,7 +348,7 @@
             // lbltotalbooks
             // 
             this.lbltotalbooks.AutoSize = true;
-            this.lbltotalbooks.Location = new System.Drawing.Point(204, 215);
+            this.lbltotalbooks.Location = new System.Drawing.Point(199, 215);
             this.lbltotalbooks.Name = "lbltotalbooks";
             this.lbltotalbooks.Size = new System.Drawing.Size(58, 18);
             this.lbltotalbooks.TabIndex = 20;
@@ -338,6 +374,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button10);
+            this.groupBox3.Controls.Add(this.label16);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label12);
@@ -351,16 +389,36 @@
             this.groupBox3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox3.Location = new System.Drawing.Point(43, 389);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1362, 278);
+            this.groupBox3.Size = new System.Drawing.Size(1372, 278);
             this.groupBox3.TabIndex = 22;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Reports";
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(925, 199);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(179, 48);
+            this.button10.TabIndex = 32;
+            this.button10.Text = "Missing and Return";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Image = global::WinFormsApp1.Properties.Resources.pros_and_cons;
+            this.label16.Location = new System.Drawing.Point(949, 53);
+            this.label16.MinimumSize = new System.Drawing.Size(128, 128);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(128, 128);
+            this.label16.TabIndex = 31;
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Image = global::WinFormsApp1.Properties.Resources.economy;
-            this.label14.Location = new System.Drawing.Point(949, 53);
+            this.label14.Image = global::WinFormsApp1.Properties.Resources.report;
+            this.label14.Location = new System.Drawing.Point(1161, 53);
             this.label14.MinimumSize = new System.Drawing.Size(128, 128);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(128, 128);
@@ -389,12 +447,13 @@
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button9.Location = new System.Drawing.Point(925, 199);
+            this.button9.Location = new System.Drawing.Point(1146, 199);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(179, 48);
             this.button9.TabIndex = 27;
             this.button9.Text = "Due Books";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
@@ -405,6 +464,7 @@
             this.button8.TabIndex = 26;
             this.button8.Text = "Return Stats";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button7
             // 
@@ -415,6 +475,7 @@
             this.button7.TabIndex = 25;
             this.button7.Text = "Issued Books";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -425,12 +486,81 @@
             this.button6.TabIndex = 24;
             this.button6.Text = "Book Inventory";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.lbldue);
+            this.groupBox4.Controls.Add(this.lblreturn);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox4.Location = new System.Drawing.Point(1447, 389);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(320, 278);
+            this.groupBox4.TabIndex = 23;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Realtime Summery";
+            // 
+            // lbldue
+            // 
+            this.lbldue.AutoSize = true;
+            this.lbldue.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbldue.Location = new System.Drawing.Point(202, 150);
+            this.lbldue.Name = "lbldue";
+            this.lbldue.Size = new System.Drawing.Size(52, 18);
+            this.lbldue.TabIndex = 5;
+            this.lbldue.Text = "lbldue";
+            // 
+            // lblreturn
+            // 
+            this.lblreturn.AutoSize = true;
+            this.lblreturn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblreturn.Location = new System.Drawing.Point(202, 103);
+            this.lblreturn.Name = "lblreturn";
+            this.lblreturn.Size = new System.Drawing.Size(69, 18);
+            this.lblreturn.TabIndex = 4;
+            this.lblreturn.Text = "lblreturn";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label18.Location = new System.Drawing.Point(70, 152);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(96, 18);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Due books  :";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label17.Location = new System.Drawing.Point(70, 105);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(126, 18);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Wait for Return  :";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Image = global::WinFormsApp1.Properties.Resources.button;
+            this.label20.Location = new System.Drawing.Point(1590, 26);
+            this.label20.MinimumSize = new System.Drawing.Size(32, 32);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(32, 32);
+            this.label20.TabIndex = 24;
+            this.label20.Click += new System.EventHandler(this.label20_Click);
             // 
             // DashboradTeacher
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1812, 903);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -439,12 +569,15 @@
             this.Name = "DashboradTeacher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DashboradTeacher";
+            this.Load += new System.EventHandler(this.DashboradTeacher_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -485,5 +618,15 @@
         private Button button7;
         private Button button6;
         private Label label15;
+        private GroupBox groupBox4;
+        private Label lbldue;
+        private Label lblreturn;
+        private Label label18;
+        private Label label17;
+        private Button button10;
+        private Label label16;
+        private Button button11;
+        private Label label19;
+        private Label label20;
     }
 }

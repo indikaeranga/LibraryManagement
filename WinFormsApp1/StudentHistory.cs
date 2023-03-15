@@ -8,27 +8,33 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
 
 namespace WinFormsApp1
 {
     public partial class StudentHistory : Form
     {
         ConString cn = new ConString();
-        public StudentHistory(string teacher)
+        public StudentHistory(string teacher,Size formSize)
         {
             InitializeComponent();
+            this.Size = formSize;
             lblteacher.Text = teacher.ToString();
+            btnreport.Enabled = false;
         }
-
+        
         private void btnsearch_Click(object sender, EventArgs e)
         {
-            grid_load_Book_Issue_STD();
-            grid_load_Book_receive_STD();
+            grid_load_Book_Issue_STD();  //grid load
+            grid_load_Book_receive_STD();  // grid load
             check_student_name();
         }
 
         private void label4_Click(object sender, EventArgs e)
         {
+           
             DashboradTeacher td = new DashboradTeacher(lblteacher.Text);
             this.Hide();
             td.Show();
@@ -79,20 +85,44 @@ namespace WinFormsApp1
                 {
                     DataRow row = dta.Rows[0];
                     lblstudent.Text = row[0].ToString();
+                    btnreport.Enabled = true;
                 }
                 else
                 {
                     lblstudent.Text = "";
-                    MessageBox.Show("Student not add to system. Please add before issue book.");
+                    btnreport.Enabled = false;
+                    MessageBox.Show("No Records found for this student ID.");
                 }
                 con.Close();
             }
             catch (Exception ex)
             {
+                btnreport.Enabled = false;
                 MessageBox.Show("error : Student ID empty");
             }
 
 
         }
+
+        private void btnreport_Click(object sender, EventArgs e)
+        {
+            Print_STD_report streport = new Print_STD_report(lblteacher.Text,txtstdid.Text, lblstudent.Text);
+            streport.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

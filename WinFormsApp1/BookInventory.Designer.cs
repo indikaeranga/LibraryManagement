@@ -235,6 +235,8 @@
             // 
             // btnBrefresh
             // 
+            this.btnBrefresh.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBrefresh.ForeColor = System.Drawing.Color.Green;
             this.btnBrefresh.Location = new System.Drawing.Point(466, 173);
             this.btnBrefresh.Name = "btnBrefresh";
             this.btnBrefresh.Size = new System.Drawing.Size(94, 29);
@@ -254,6 +256,8 @@
             // 
             // btnBdelete
             // 
+            this.btnBdelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBdelete.ForeColor = System.Drawing.Color.Red;
             this.btnBdelete.Location = new System.Drawing.Point(349, 173);
             this.btnBdelete.Name = "btnBdelete";
             this.btnBdelete.Size = new System.Drawing.Size(94, 29);
@@ -273,6 +277,8 @@
             // 
             // btnBupdate
             // 
+            this.btnBupdate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBupdate.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnBupdate.Location = new System.Drawing.Point(233, 173);
             this.btnBupdate.Name = "btnBupdate";
             this.btnBupdate.Size = new System.Drawing.Size(94, 29);
@@ -292,6 +298,8 @@
             // 
             // btnBadd
             // 
+            this.btnBadd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBadd.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnBadd.Location = new System.Drawing.Point(118, 173);
             this.btnBadd.Name = "btnBadd";
             this.btnBadd.Size = new System.Drawing.Size(94, 29);
@@ -553,6 +561,8 @@
             // 
             // btnBIrefresh
             // 
+            this.btnBIrefresh.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBIrefresh.ForeColor = System.Drawing.Color.Green;
             this.btnBIrefresh.Location = new System.Drawing.Point(1055, 192);
             this.btnBIrefresh.Name = "btnBIrefresh";
             this.btnBIrefresh.Size = new System.Drawing.Size(94, 29);
@@ -563,6 +573,8 @@
             // 
             // btnBIdelete
             // 
+            this.btnBIdelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBIdelete.ForeColor = System.Drawing.Color.Red;
             this.btnBIdelete.Location = new System.Drawing.Point(1055, 142);
             this.btnBIdelete.Name = "btnBIdelete";
             this.btnBIdelete.Size = new System.Drawing.Size(94, 29);
@@ -573,6 +585,7 @@
             // 
             // btnBIupdate
             // 
+            this.btnBIupdate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnBIupdate.Location = new System.Drawing.Point(1055, 94);
             this.btnBIupdate.Name = "btnBIupdate";
             this.btnBIupdate.Size = new System.Drawing.Size(94, 29);
@@ -583,6 +596,8 @@
             // 
             // btnBIadd
             // 
+            this.btnBIadd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBIadd.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnBIadd.Location = new System.Drawing.Point(1055, 46);
             this.btnBIadd.Name = "btnBIadd";
             this.btnBIadd.Size = new System.Drawing.Size(94, 29);
@@ -762,8 +777,8 @@
             // 
             // BookInventory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1812, 903);
             this.Controls.Add(this.lblteacher);
             this.Controls.Add(this.label8);
