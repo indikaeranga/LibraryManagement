@@ -13,7 +13,7 @@ namespace WinFormsApp1
     {
         public string connectionstring()
         {
-            string constr = @"Data Source=.\SQLEXPRESS;Initial Catalog=library;Integrated Security=True";
+            string constr = @"Data Source=INDIKAH1\SQLEXPRESS;Initial Catalog=library;Integrated Security=True";
             return constr;
         }
         public string displayTime()

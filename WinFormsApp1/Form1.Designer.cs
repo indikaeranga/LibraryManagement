@@ -116,7 +116,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Image = global::WinFormsApp1.Properties.Resources.Untitled_1;
+            this.label2.Image = global::WinFormsApp1.Properties.Resources.books;
             this.label2.Location = new System.Drawing.Point(128, 162);
             this.label2.MinimumSize = new System.Drawing.Size(400, 400);
             this.label2.Name = "label2";

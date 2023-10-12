@@ -697,6 +697,7 @@
             this.cmBIrack.Size = new System.Drawing.Size(259, 28);
             this.cmBIrack.TabIndex = 6;
             this.cmBIrack.SelectedIndexChanged += new System.EventHandler(this.cmBIrack_SelectedIndexChanged);
+            this.cmBIrack.SelectionChangeCommitted += new System.EventHandler(this.cmBIrack_SelectionChangeCommitted);
             this.cmBIrack.SelectedValueChanged += new System.EventHandler(this.cmBIrack_SelectedValueChanged);
             this.cmBIrack.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmBIrack_KeyDown);
             this.cmBIrack.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmBIrack_KeyPress);

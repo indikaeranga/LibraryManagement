@@ -90,6 +90,8 @@ namespace WinFormsApp1
             btnBadd.Enabled = true;
             btnBdelete.Enabled = false;
             btnBupdate.Enabled = false;
+            btnBIupdate.Enabled = false;
+            btnBIdelete.Enabled = false;
             txtBsearch.Text = "";
 
         }
@@ -195,6 +197,7 @@ namespace WinFormsApp1
             try
             {
                 txtBisbn.Text = dgvBook.SelectedRows[0].Cells[0].Value.ToString();
+                txtBInvISBN.Text = dgvBook.SelectedRows[0].Cells[0].Value.ToString();
                 txtBname.Text = dgvBook.SelectedRows[0].Cells[1].Value.ToString();
                 txtBauthor.Text = dgvBook.SelectedRows[0].Cells[2].Value.ToString();
                 txtBdescription.Text = dgvBook.SelectedRows[0].Cells[3].Value.ToString();
@@ -343,15 +346,19 @@ namespace WinFormsApp1
         {
             SqlConnection con2 = new SqlConnection(cn.connectionstring());
             con2.Open();
-            string sql = "select rack_name_id from Rack";
+            string sql = "select rack_name_id,remark from Rack";
             SqlCommand cmd = new SqlCommand(sql, con2);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dta = new DataTable();
-            da.Fill(dta);
+            DataSet dt = new DataSet();
+            da.Fill(dt,"rack");
+            //DataTable dta = new DataTable();
+            // da.Fill(dta);
+            cmBIrack.DataSource = dt.Tables["rack"];
             cmBIrack.DisplayMember = "rack_name_id";
-            cmBIrack.ValueMember = "rack_name_id";
-            cmBIrack.DataSource = dta;
+            cmBIrack.ValueMember = "remark";
+            
             cmBIrack.SelectedIndex = -1;
+            cmBIrack.Text = "select rack";
             con2.Close();
         }
         private int Book_Inv_radiobtn_value()
@@ -814,6 +821,12 @@ namespace WinFormsApp1
             {
                 MessageBox.Show("Data Empty in ISBN. operation fail !");
             }
+        }
+
+        private void cmBIrack_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            lblrackname.Text = cmBIrack.GetItemText(cmBIrack.SelectedValue);
+
         }
     }
 }
